@@ -47,8 +47,7 @@ io.on('connection', (socket) => {
     ;
 });
 
-
-const PORT = 80;
+const PORT = process.env.PORT || 4000;
 
 server.listen(PORT, () => {
     console.log(`Listening to port ${PORT}`)
