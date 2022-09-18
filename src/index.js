@@ -48,8 +48,8 @@ io.on('connection', (socket) => {
 });
 
 
-const PORT = 8000;
+const PORT = 80;
 
-server.listen(PORT, '0.0.0.0', () => {
+server.listen(PORT, () => {
     console.log(`Listening to port ${PORT}`)
 });
