@@ -1,0 +1,316 @@
+<html class=""><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}</style><link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <!------ Include the above in your HEAD tag ---------->
+
+
+
+
+
+
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,300,700" rel="stylesheet" type="text/css">
+
+  <style class="cp-pen-styles">* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  html, body {
+    background: -webkit-linear-gradient(330deg, #000, #f0a6ca);
+    background: linear-gradient(120deg, #000, #f0a6ca);
+    overflow: hidden;
+  }
+
+  .container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    height: 106vh;
+    width: 100vw;
+  }
+
+  .container h1 {
+    margin: 0.5em auto;
+    color: #FFF;
+    text-align: center;
+  }
+
+  .chatbox {
+    background: rgba(255, 255, 255, 0.05);
+    width: 80%;
+    height: 75%;
+    border-radius: 0.2em;
+    position: relative;
+    box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .chatbox__messages__user-message--ind-message {
+    float: right;
+  }
+
+  .chatbox__messages__user-message--ind-message.incoming {
+    float: left!important;
+  }
+
+  .chatbox__messages__user-message {
+    width: 450px;
+  }
+
+  .chatbox__messages__user-message--ind-message {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 1em 0;
+    height: auto;
+    width: 65%;
+    border-radius: 5px;
+    margin: 1em 1em;
+    overflow: auto;
+  }
+
+  .chatbox__messages__user-message--ind-message > p.name {
+    color: #FFF;
+    font-size: 1em;
+  }
+
+  .chatbox__messages__user-message--ind-message > p.message {
+    color: #FFF;
+    font-size: 0.7em;
+    margin: 0 2.8em;
+  }
+
+  .chatbox__user-list {
+    background: rgba(255, 255, 255, 0.1);
+    width: 25%;
+    height: 100%;
+    float: right;
+    border-top-right-radius: 0.2em;
+    border-bottom-right-radius: 0.2em;
+  }
+
+  .chatbox__user-list h1 {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9em;
+    padding: 1em;
+    margin: 0;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  .chatbox__user, .chatbox__user--active, .chatbox__user--busy, .chatbox__user--away {
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 100%;
+    margin: 1em 0.7em;
+  }
+
+  .chatbox__user--active {
+    background: rgba(23, 190, 187, 0.8);
+  }
+
+  .chatbox__user--busy {
+    background: rgba(252, 100, 113, 0.8);
+  }
+
+  .chatbox__user--away {
+    background: rgba(255, 253, 130, 0.8);
+  }
+
+  .chatbox p {
+    float: left;
+    text-align: left;
+    margin: -0.25em 2em;
+    font-size: 0.7em;
+    font-weight: 300;
+    color: #FFF;
+    width: 200px;
+  }
+
+  .chatbox form {
+    background: #222;
+  }
+
+  .chatbox form input {
+    background: rgba(255, 255, 255, 0.03);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border: none;
+    width: 75%;
+    padding: 1.2em;
+    outline: none;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 300;
+  }
+
+  ::-webkit-input-placeholder {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  :-moz-placeholder {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  ::-moz-placeholder {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  :-ms-input-placeholder {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  #nickname, #socket_host {
+    border: 1px solid white;
+    padding: 2px;
+    display: block;
+    background-color: transparent;
+  }
+
+  #login_submit {
+    border: 1px solid white;
+    padding: 2px;
+    margin-top: 5px;
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+
+  }
+
+  .chatbox__messages__notification {
+    height: auto;
+    width: fit-content;
+    display: block;
+    margin-top: 10px;
+  }
+
+  .messages-list {
+    height: 93%;
+    overflow-y: scroll;
+  }
+  </style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.min.js" integrity="sha512-xzC4RSo+4m1clLhr0pQr6yFjO9bJ0py6+l65SBibI8/pSEU8U4iVZ7xm95WRq8PXw2MKv8SSR3QkqR2jciG5Ug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<body>
+<div class="container ng-scope" ng-app="chatApp">
+  <h1>EUA Chat Web Client</h1>
+  <div class="login_form">
+    <label for="nickname">nickname</label>
+    <input type="text" id="nickname" autofocus>
+
+    <label for="socket_host">Websocket host</label>
+    <input type="text" id="socket_host" value="http://localhost:8000">
+    <input type="submit" id="login_submit">
+  </div>
+  <div id="chatbox" class="chatbox ng-scope" ng-controller="MessageCtrl as chatMessage" style="display: none">
+    <div class="chatbox__user-list">
+      <h1>Users Online</h1>
+      <div id="users-list"></div>
+    </div>
+    <div class="messages-list" id="messages-list">
+
+    </div>
+    <form id="message-form" class="ng-pristine ng-valid">
+      <input type="text" placeholder="Type Message" id="message-input">
+    </form>
+  </div>
+
+</div>
+<div style="position: static !important;">
+
+</div>
+</body>
+<script>
+  document.getElementById('login_submit').addEventListener('click', (event) => {
+    event.preventDefault();
+    const nickname = document.getElementById('nickname').value;
+
+    if(nickname.length === 0) return false;
+
+    const socketHost = document.getElementById('socket_host').value;
+
+    var socket = io(socketHost, {
+      'query': `nickname=${nickname}`
+    });
+
+    const elements = document.getElementsByClassName('login_form');
+
+    while(elements.length > 0){
+      elements[0].parentNode.removeChild(elements[0]);
+    }
+
+    document.getElementById('message-form').addEventListener('submit', (event) => {
+      event.preventDefault()
+      const input = document.getElementById('message-input')
+      const text = input.value;
+
+      if(text.length > 0) {
+        socket.emit('chatMessage', text)
+        input.value = '';
+      }
+    })
+
+    socket
+            .on('connect', () => {
+              document.getElementById('chatbox').style.display = 'block'
+            })
+            .on('updateUsersList', (data) => {
+              let users = '';
+              Object.keys(data).forEach((key) => {
+                const html = `<div class="chatbox__user--active"><p>${data[key]}</p></div>`;
+                users += html;
+              })
+              document.getElementById('users-list').innerHTML = users
+            })
+            .on('chatMessage', (data) => {
+              const message = `<div class="chatbox__messages__user-message--ind-message ${data.from.id === socket.id ? "" : ' incoming '}">
+                                <p class="name ng-binding">${data.from.name}</p>
+                                <br>
+                                <p class="message ng-binding">${data.message}</p>
+                              </div>`
+
+              const chatHTML = document.getElementById('messages-list')
+              let chatHTMLState = chatHTML.innerHTML
+              chatHTMLState += message
+              chatHTML.innerHTML = chatHTMLState;
+
+              chatHTML.scrollTop = chatHTML.scrollHeight;
+            })
+            .on('userConnected', (user) => {
+              if(user.id === socket.id) return false;
+              const message = `<div class="chatbox__messages__notification">
+                                <p class="name ng-binding">${user.nickname} connected</p>
+                              </div>`
+
+              const chatHTML = document.getElementById('messages-list')
+              let chatHTMLState = chatHTML.innerHTML
+              chatHTMLState += message
+              chatHTML.innerHTML = chatHTMLState;
+
+              chatHTML.scrollTop = chatHTML.scrollHeight;
+            })
+            .on('userDisconnected', (user) => {
+              if(user.id === socket.id) return false;
+              const message = `<div class="chatbox__messages__notification">
+                                <p class="name ng-binding">${user.nickname} disconnected</p>
+                              </div>`
+
+              const chatHTML = document.getElementById('messages-list')
+              let chatHTMLState = chatHTML.innerHTML
+              chatHTMLState += message
+              chatHTML.innerHTML = chatHTMLState;
+
+              chatHTML.scrollTop = chatHTML.scrollHeight;
+            })
+  })
+</script>
+</html>
