@@ -25,7 +25,7 @@ app.get('/', (req, res, next) => {
     fs.readFile(path.join(__dirname, './view/index.html'), (err, data) => {
         if(err) throw err;
         let html = data.toString();
-        html = html.replace('[[WEBSOCKET_HOST]]', `${HOST}:${PORT}`)
+        html = html.replace('[[WEBSOCKET_HOST]]', `${HOST}`)
         res.status(200).send(html)
     })
 })
