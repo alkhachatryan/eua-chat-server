@@ -7,6 +7,9 @@ const server = http.createServer(app);
 const { Server } = require('socket.io');
 const io = new Server(server)
 
+const HOST = process.env.APP_URL || 'http://localhost';
+const PORT = process.env.PORT || 3000;
+
 io.chatClients = {};
 io.emitAll = (eventName, data) => {
     Object.keys(io.chatClients).forEach((id) => {
@@ -17,7 +20,8 @@ io.emitAll = (eventName, data) => {
 app.get('/', (req, res, next) => {
     fs.readFile(path.join(__dirname, './view/index.html'), (err, data) => {
         if(err) throw err;
-        const html = data.toString();
+        let html = data.toString();
+        html = html.replace('[[WEBSOCKET_HOST]]', `${HOST}:${PORT}`)
         res.status(200).send(html)
     })
 })
@@ -46,8 +50,6 @@ io.on('connection', (socket) => {
         })
     ;
 });
-
-const PORT = process.env.PORT || 4000;
 
 server.listen(PORT, () => {
     console.log(`Listening to port ${PORT}`)
