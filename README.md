@@ -4,7 +4,9 @@ This repo contains SocketIO websocket server, express server and web client for 
 ![](https://github.com/alkhachatryan/eua-chat-server/blob/master/screenshot.png)
 
 Use **https://eua-chat.herokuapp.com/** as websocket server host
+
 When connecting to the server there will be automatically emitted **connection** event.
+
 When disconnected, **disconnect** event will be emitted automatically.
 
 ### Available events to emit from client
